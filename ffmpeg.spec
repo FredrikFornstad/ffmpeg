@@ -18,7 +18,6 @@
 %lib_package avformat 56
 %lib_package avdevice 56
 %lib_package avfilter 5
-%lib_package avresample 2
 %lib_package swscale 3
 %lib_package swresample 1
 %lib_package postproc 53
@@ -26,7 +25,7 @@
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
 Version: 2.5.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv3
 Group: System Environment/Libraries
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
@@ -162,7 +161,11 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Mon Feb 16 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.5.4-2
+- Removed libavresample as it was not built as expected, libswresample should also be a better alternative
+
 * Sat Feb 14 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.5.4-1
 - Based on ATrpms 2.2.x spec file
 - Added libavresample
 - Added gnutls and libass support
+- Added x265
