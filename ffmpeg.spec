@@ -24,8 +24,8 @@
 
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
-Version: 2.5.4
-Release: 2%{?dist}
+Version: 2.6
+Release: 1%{?dist}
 License: GPLv3
 Group: System Environment/Libraries
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
@@ -161,6 +161,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Tue Mar 10 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.6-1
+- New upstream release
+
 * Mon Feb 16 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.5.4-2
 - Removed libavresample as it was not built as expected, libswresample should also be a better alternative
 
