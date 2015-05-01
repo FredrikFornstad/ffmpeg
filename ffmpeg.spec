@@ -1,6 +1,6 @@
 %bcond_with    nonfree
 %bcond_without x264
-#bcond_without dirac
+%bcond_without schroedinger
 %bcond_without speex
 %bcond_without v4l
 %bcond_without openjpeg
@@ -25,7 +25,7 @@
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
 Version: 2.6.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv3
 Group: System Environment/Libraries
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
@@ -35,8 +35,6 @@ BuildRoot: %{_tmppath}/%{name}-root
 BuildRequires: imlib2-devel, SDL-devel, freetype-devel, zlib-devel, bzip2-devel
 BuildRequires: a52dec-devel
 BuildRequires: libdc1394-devel, libraw1394-devel
-# because pkg-config --libs dirac needs libstdc++
-%{?with_dirac:BuildRequires: libstdc++-devel}
 %{?with_nonfree:BuildRequires: faac-devel}
 BuildRequires: faad2-devel
 BuildRequires: gsm-devel
@@ -46,7 +44,7 @@ BuildRequires: libtheora-devel, libvorbis-devel
 BuildRequires: xvidcore-devel
 %{?with_x264:BuildRequires: x264-devel}
 %{?with_openjpeg:BuildRequires: openjpeg-devel}
-%{?with_dirac:BuildRequires: dirac-devel, schroedinger-devel}
+%{?with_schroedinger:BuildRequires: schroedinger-devel}
 %{?with_speex:BuildRequires: speex-devel}
 BuildRequires: opencore-amr-devel
 BuildRequires: libvdpau-devel
@@ -109,7 +107,6 @@ test -f version.h || echo "#define FFMPEG_VERSION \"%{evr}\"" > version.h
 	%{?with_frei0r:--enable-frei0r} \
 	%{?with_opencv:--enable-libopencv} \
 	--enable-libdc1394 \
-	%{?with_dirac:--enable-libdirac} \
 	%{?with_nonfree:--enable-libfaac} \
 	--enable-libgsm \
 	--enable-libmp3lame \
@@ -117,7 +114,7 @@ test -f version.h || echo "#define FFMPEG_VERSION \"%{evr}\"" > version.h
 	--enable-libopencore-amrnb --enable-libopencore-amrwb \
 	%{?with_openjpeg:--enable-libopenjpeg} \
 	--enable-librtmp \
-	%{?with_dirac:--enable-libschroedinger} \
+	%{?with_schroedinger:--enable-libschroedinger} \
 	%{?with_speex:--enable-libspeex} \
 	--enable-libtheora \
 	--enable-libvorbis \
@@ -161,6 +158,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Fri May 1 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.6.2-2
+- Enabled schroedinger for support of dirac video
+
 * Mon Apr 13 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.6.2-1
 - New upstream release
 
