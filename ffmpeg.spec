@@ -25,7 +25,7 @@
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
 Version: 2.6.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPLv3
 Group: System Environment/Libraries
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
@@ -48,7 +48,7 @@ BuildRequires: xvidcore-devel
 %{?with_speex:BuildRequires: speex-devel}
 BuildRequires: opencore-amr-devel
 BuildRequires: libvdpau-devel
-BuildRequires: yasm
+BuildRequires: yasm, atrpms-rpm-config
 %{?with_libva:BuildRequires: libva-devel}
 %{?with_frei0r:BuildRequires: frei0r-plugins-devel}
 %{?with_opencv:BuildRequires: opencv-devel}
@@ -158,6 +158,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed May 6 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.6.2-3
+- Added buildrequirement atrpms-rpm-config
+
 * Fri May 1 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.6.2-2
 - Enabled schroedinger for support of dirac video
 
