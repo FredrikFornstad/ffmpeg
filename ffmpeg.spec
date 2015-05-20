@@ -11,7 +11,7 @@
 %bcond_without libass
 %bcond_without gnutls
 %bcond_without x265
-
+ 
 
 %lib_package avutil 54
 %lib_package avcodec 56
