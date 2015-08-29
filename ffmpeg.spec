@@ -44,13 +44,13 @@
 %bcond_without vidstab
 
 #**********************************************************
-# The following libs works in ClearOS 7 but not in ClearOS 6
-# Build in ClearOS 6 using: rpmbuild -ba ffmpeg.spec --without frei0r --without libcdio --without soxr --without wavpack
+# The following 4 libs are disabled for ClearOS 6
+# If using this spec file to build in ClearOS 7 then use: rpmbuild -ba ffmpeg.spec --with frei0r --with libcdio --with soxr --with wavpack
 #**********************************************************
-%bcond_without frei0r
-%bcond_without libcdio
-%bcond_without soxr
-%bcond_without wavpack
+%bcond_with frei0r
+%bcond_with libcdio
+%bcond_with soxr
+%bcond_with wavpack
 
 
 %global libavutil_ver 54
@@ -65,7 +65,7 @@
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
 Version: 2.7.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv3
 Group: System Environment/Libraries
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
@@ -401,6 +401,9 @@ rm -rf %{buildroot}
 %{_libdir}/libpostproc.so.*
 
 %changelog
+* Sat Aug 29 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.7.2-2
+- Branched and adjusted spec file for ClearOS 6
+
 * Tue Jul 21 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.7.2-1
 - New upstream release
 
