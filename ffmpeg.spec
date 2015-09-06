@@ -119,7 +119,7 @@ BuildRequires: SDL-devel, yasm
 %{?with_x265:BuildRequires: x265-devel}
 %{?with_xavs:BuildRequires: xavs-devel}
 %{?with_xvid:BuildRequires: xvidcore-devel}
-%{?with_vidstab:BuildRequires: vid.stab}
+%{?with_vidstab:BuildRequires: vid.stab-devel}
 Requires: %{name}-libavutil_%{libavutil_ver}
 Requires: %{name}-libavcodec_%{libavcodec_ver}
 Requires: %{name}-libavformat_%{libavformat_ver}
@@ -196,7 +196,7 @@ Requires: libX11-devel, libXext-devel
 %{?with_x265:Requires: x265-devel}
 %{?with_xavs:Requires: xavs-devel}
 %{?with_xvid:Requires: xvidcore-devel}
-%{?with_vidstab:Requires: vid.stab}
+%{?with_vidstab:Requires: vid.stab-devel}
 
 %description devel
 This package contains the FFmpeg shared library development files
