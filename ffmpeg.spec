@@ -64,11 +64,11 @@
 
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
-Version: 2.7.2
+Version: 2.8
 Release: 1%{?dist}
 License: GPLv3
 Group: System Environment/Libraries
-Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
+Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.xz
 #Source: http://www.ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2
 URL: http://ffmpeg.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}-root
@@ -401,6 +401,9 @@ rm -rf %{buildroot}
 %{_libdir}/libpostproc.so.*
 
 %changelog
+* Wed Sep 9 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.8-1
+* New upstream release
+
 * Tue Jul 21 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.7.2-1
 - New upstream release
 
