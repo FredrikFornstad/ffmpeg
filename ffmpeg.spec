@@ -65,7 +65,7 @@
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
 Version: 2.8
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv3
 Group: System Environment/Libraries
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.xz
@@ -401,6 +401,9 @@ rm -rf %{buildroot}
 %{_libdir}/libpostproc.so.*
 
 %changelog
+* Fri Oct 9 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.8-2
+- New build with an updated version of x265
+
 * Wed Sep 9 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.8-1
 * New upstream release
 
