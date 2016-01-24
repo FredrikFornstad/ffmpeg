@@ -52,23 +52,15 @@
 %bcond_with soxr
 %bcond_with wavpack
 
-
-%global libavutil_ver 54
-%global libavcodec_ver 56
-%global libavformat_ver 56
-%global libavdevice_ver 56
-%global libavfilter_ver 5
-%global libswscale_ver 3
-%global libswresample_ver 1
-%global libpostproc_ver 53
+%global x264version 0.148
 
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
-Version: 2.8
-Release: 2%{?dist}
+Version: 2.8.5
+Release: 1%{?dist}
 License: GPLv3
 Group: System Environment/Libraries
-Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.xz
+Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
 #Source: http://www.ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2
 URL: http://ffmpeg.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}-root
@@ -115,19 +107,27 @@ BuildRequires: SDL-devel, yasm
 %{?with_visualon:BuildRequires: vo-amrwbenc-devel}
 %{?with_visualon:%{!?with_nonfree:BuildRequires: vo-aacenc-devel}}
 %{?with_wavpack:BuildRequires: wavpack-devel}
-%{?with_x264:BuildRequires: x264-devel}
+%{?with_x264:BuildRequires: x264-devel = %{x264version}}
 %{?with_x265:BuildRequires: x265-devel}
 %{?with_xavs:BuildRequires: xavs-devel}
 %{?with_xvid:BuildRequires: xvidcore-devel}
-%{?with_vidstab:BuildRequires: vid.stab, vid.stab-devel}
-Requires: %{name}-libavutil_%{libavutil_ver}
-Requires: %{name}-libavcodec_%{libavcodec_ver}
-Requires: %{name}-libavformat_%{libavformat_ver}
-Requires: %{name}-libavdevice_%{libavdevice_ver}
-Requires: %{name}-libavfilter_%{libavfilter_ver}
-Requires: %{name}-libswscale_%{libswscale_ver}
-Requires: %{name}-libswresample_%{libswresample_ver}
-Requires: %{name}-libpostproc_%{libpostproc_ver}
+%{?with_vidstab:Requires: vid.stab}
+Requires: %{name}-libavutil
+Requires: %{name}-libavcodec
+Requires: %{name}-libavformat
+Requires: %{name}-libavdevice
+Requires: %{name}-libavfilter
+Requires: %{name}-libswscale
+Requires: %{name}-libswresample
+Requires: %{name}-libpostproc
+Obsoletes: %{name}-libavutil_54
+Obsoletes: %{name}-libavcodec_56
+Obsoletes: %{name}-libavformat_56
+Obsoletes: %{name}-libavdevice_56
+Obsoletes: %{name}-libavfilter_5
+Obsoletes: %{name}-libswscale_3
+Obsoletes: %{name}-libswresample_1
+Obsoletes: %{name}-libpostproc_53
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -141,14 +141,14 @@ quality polyphase filter.
 %package devel
 Summary: FFmpeg shared library development files
 Group: Development/Libraries
-Requires: %{name}-libavutil_%{libavutil_ver} = %{version}-%{release}
-Requires: %{name}-libavcodec_%{libavcodec_ver} = %{version}-%{release}
-Requires: %{name}-libavformat_%{libavformat_ver} = %{version}-%{release}
-Requires: %{name}-libavdevice_%{libavdevice_ver} = %{version}-%{release}
-Requires: %{name}-libavfilter_%{libavfilter_ver} = %{version}-%{release}
-Requires: %{name}-libswscale_%{libswscale_ver} = %{version}-%{release}
-Requires: %{name}-libswresample_%{libswresample_ver} = %{version}-%{release}
-Requires: %{name}-libpostproc_%{libpostproc_ver} = %{version}-%{release}
+Requires: %{name}-libavutil = %{version}-%{release}
+Requires: %{name}-libavcodec = %{version}-%{release}
+Requires: %{name}-libavformat = %{version}-%{release}
+Requires: %{name}-libavdevice = %{version}-%{release}
+Requires: %{name}-libavfilter = %{version}-%{release}
+Requires: %{name}-libswscale = %{version}-%{release}
+Requires: %{name}-libswresample = %{version}-%{release}
+Requires: %{name}-libpostproc = %{version}-%{release}
 Requires: libX11-devel, libXext-devel
 %{?with_nonfree:Requires: faac-devel}
 %{?with_dcadec:Requires: dcadec-devel}
@@ -192,72 +192,72 @@ Requires: libX11-devel, libXext-devel
 %{?with_visualon:Requires: vo-amrwbenc-devel}
 %{?with_visualon:%{!?with_nonfree:Requires: vo-aacenc-devel}}
 %{?with_wavpack:Requires: wavpack-devel}
-%{?with_x264:Requires: x264-devel}
+%{?with_x264:Requires: x264-devel = %{x264version}}
 %{?with_x265:Requires: x265-devel}
 %{?with_xavs:Requires: xavs-devel}
 %{?with_xvid:Requires: xvidcore-devel}
-%{?with_vidstab:Requires: vid.stab, vid.stab-devel}
+%{?with_vidstab:Requires: vid.stab}
 
 %description devel
 This package contains the FFmpeg shared library development files
 
-%package libavutil_%{libavutil_ver}
+%package libavutil
 Summary: FFmpeg-libavutil shared library
 Group: Development/Libraries
 
-%description libavutil_%{libavutil_ver}
+%description libavutil
 This package contain the FFmpeg-libavutil shared library
 
-%package libavcodec_%{libavcodec_ver}
+%package libavcodec
 Summary: FFmpeg-libavcodec shared library
 Group: Development/Libraries
 %{?with_opus:Requires: opus}
 
-%description libavcodec_%{libavcodec_ver}
+%description libavcodec
 This package contain the FFmpeg-libavcodec shared library
 
-%package libavformat_%{libavformat_ver}
+%package libavformat
 Summary: FFmpeg-libavformat shared library
 Group: Development/Libraries
 
-%description libavformat_%{libavformat_ver}
+%description libavformat
 This package contain the FFmpeg-libavformat shared library
 
-%package libavdevice_%{libavdevice_ver}
+%package libavdevice
 Summary: FFmpeg-libavdevice shared library
 Group: Development/Libraries
 %{?with_libcaca:Requires: libcaca}
 %{?with_openal:Requires: openal-soft}
 
-%description libavdevice_%{libavdevice_ver}
+%description libavdevice
 This package contain the FFmpeg-libavdevice shared library
 
-%package libavfilter_%{libavfilter_ver}
+%package libavfilter
 Summary: FFmpeg-libavfilter shared library
 Group: Development/Libraries
 
-%description libavfilter_%{libavfilter_ver}
+%description libavfilter
 This package contain the FFmpeg-libavfilter shared library
 
-%package libswscale_%{libswscale_ver}
+%package libswscale
 Summary: FFmpeg-libswscale shared library
 Group: Development/Libraries
 
-%description libswscale_%{libswscale_ver}
+%description libswscale
 This package contain the FFmpeg-libswscale shared library
 
-%package libswresample_%{libswresample_ver}
+%package libswresample
 Summary: FFmpeg-libswresample shared library
 Group: Development/Libraries
 
-%description libswresample_%{libswresample_ver}
+%description libswresample
 This package contain the FFmpeg-libswresample shared library
 
-%package libpostproc_%{libpostproc_ver}
+%package libpostproc
 Summary: FFmpeg-libpostproc shared library
 Group: Development/Libraries
 
-%description libpostproc_%{libpostproc_ver}
+%description libpostproc
 This package contain the FFmpeg-libpostproc shared library
 
 %prep
@@ -361,51 +361,55 @@ rm -rf %{buildroot}
 %{_libdir}/pkgconfig/*
 %{_includedir}/*
 
-%files libavutil_%{libavutil_ver}
+%files libavutil
 %defattr(-,root,root,-)
 %{_libdir}/libavutil.so.*
 %{_mandir}/man3/libavutil.3*
 
-%files libavcodec_%{libavcodec_ver}
+%files libavcodec
 %defattr(-,root,root,-)
 %{_libdir}/libavcodec.so.*
 %{_mandir}/man3/libavcodec.3*
 
-%files libavformat_%{libavformat_ver}
+%files libavformat
 %defattr(-,root,root,-)
 %{_libdir}/libavformat.so.*
 %{_mandir}/man3/libavformat.3*
 
-%files libavdevice_%{libavdevice_ver}
+%files libavdevice
 %defattr(-,root,root,-)
 %{_libdir}/libavdevice.so.*
 %{_mandir}/man3/libavdevice.3*
 
-%files libavfilter_%{libavfilter_ver}
+%files libavfilter
 %defattr(-,root,root,-)
 %{_libdir}/libavfilter.so.*
 %{_mandir}/man3/libavfilter.3*
 
-%files libswscale_%{libswscale_ver}
+%files libswscale
 %defattr(-,root,root,-)
 %{_libdir}/libswscale.so.*
 %{_mandir}/man3/libswscale.3*
 
-%files libswresample_%{libswresample_ver}
+%files libswresample
 %defattr(-,root,root,-)
 %{_libdir}/libswresample.so.*
 %{_mandir}/man3/libswresample.3*
 
-%files libpostproc_%{libpostproc_ver}
+%files libpostproc
 %defattr(-,root,root,-)
 %{_libdir}/libpostproc.so.*
 
 %changelog
+* Sun Jan 24 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.8.5-1
+- New upstream release
+- New lib naming after discussion with ClearOS team
+
+* Tue Oct 20 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.8.1-1
+- New upstream release
+
 * Fri Oct 9 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.8-2
 - New build with an updated version of x265
-
-* Wed Sep 9 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.8-1
-- New upstream release
 
 * Sat Aug 29 2015 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.7.2-2
 - Branched and adjusted spec file for ClearOS 6
