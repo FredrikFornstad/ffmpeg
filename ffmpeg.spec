@@ -1,7 +1,7 @@
 %bcond_with    nonfree
 %bcond_without avisynth
 %bcond_without stripping
-%bcond_with    dcadec
+%bcond_without dcadec
 %bcond_without filecompress
 %bcond_without fontconfig
 %bcond_without freetype
@@ -57,7 +57,7 @@
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
 Version: 2.8.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv3
 Group: System Environment/Libraries
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.xz
@@ -402,6 +402,9 @@ rm -rf %{buildroot}
 %{_libdir}/libpostproc.so.*
 
 %changelog
+* Tue Jan 26 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.8.5-2
+- Added dcadec
+
 * Sun Jan 24 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.8.5-1
 - New upstream release
 - New lib naming after discussion with ClearOS team
