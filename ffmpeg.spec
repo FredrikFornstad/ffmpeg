@@ -53,11 +53,12 @@
 %bcond_with wavpack
 
 %global x264version 0.148
+%global x265version 1.9
 
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
 Version: 2.8.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv3
 Group: System Environment/Libraries
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
@@ -108,7 +109,7 @@ BuildRequires: SDL-devel, yasm
 %{?with_visualon:%{!?with_nonfree:BuildRequires: vo-aacenc-devel}}
 %{?with_wavpack:BuildRequires: wavpack-devel}
 %{?with_x264:BuildRequires: x264-devel = %{x264version}}
-%{?with_x265:BuildRequires: x265-devel}
+%{?with_x265:BuildRequires: x265-devel = %{x265version}}
 %{?with_xavs:BuildRequires: xavs-devel}
 %{?with_xvid:BuildRequires: xvidcore-devel}
 %{?with_vidstab:Requires: vid.stab}
@@ -193,7 +194,7 @@ Requires: libX11-devel, libXext-devel
 %{?with_visualon:%{!?with_nonfree:Requires: vo-aacenc-devel}}
 %{?with_wavpack:Requires: wavpack-devel}
 %{?with_x264:Requires: x264-devel = %{x264version}}
-%{?with_x265:Requires: x265-devel}
+%{?with_x265:Requires: x265-devel = %{x265version}}
 %{?with_xavs:Requires: xavs-devel}
 %{?with_xvid:Requires: xvidcore-devel}
 %{?with_vidstab:Requires: vid.stab}
@@ -401,6 +402,9 @@ rm -rf %{buildroot}
 %{_libdir}/libpostproc.so.*
 
 %changelog
+* Fri Jan 29 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.8.5-2
+- Adjusted for new lib naming for x265
+
 * Sun Jan 24 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.8.5-1
 - New upstream release
 - New lib naming after discussion with ClearOS team
