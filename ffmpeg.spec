@@ -1,7 +1,6 @@
 %bcond_with    nonfree
 %bcond_without avisynth
 %bcond_without stripping
-%bcond_with    dcadec
 %bcond_without filecompress
 %bcond_without fontconfig
 %bcond_without freetype
@@ -52,13 +51,13 @@
 %bcond_with soxr
 %bcond_with wavpack
 
-%global x264version 0.148
-%global x265version 1.9
+%global x264version 0.146
+%global x265version 1.8
 
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
-Version: 2.8.5
-Release: 2%{?dist}
+Version: 2.8.6
+Release: 1%{?dist}
 License: GPLv3
 Group: System Environment/Libraries
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.bz2
@@ -402,6 +401,10 @@ rm -rf %{buildroot}
 %{_libdir}/libpostproc.so.*
 
 %changelog
+* Sat Feb 6 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.8.6-1
+- New upstream release
+- Removed dcadec to prepare for the ffmpeg native implementation of dcadec
+
 * Fri Jan 29 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.8.5-2
 - Adjusted for new lib naming for x265
 
