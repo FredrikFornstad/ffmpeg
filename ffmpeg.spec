@@ -403,7 +403,7 @@ rm -rf %{buildroot}
 
 %changelog
 * Sat Feb 6 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.8.6-1
-- New upstream release
+- New upstream release 
 - Removed dcadec to prepare for ffmpeg native implementation of dcadec
 
 * Fri Jan 29 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.8.5-3
