@@ -56,7 +56,7 @@
 
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
-Version: 2.8.6
+Version: 3.0
 Release: 1%{?dist}
 License: GPLv3
 Group: System Environment/Libraries
@@ -66,7 +66,6 @@ URL: http://ffmpeg.sourceforge.net/
 BuildRoot: %{_tmppath}/%{name}-root
 BuildRequires: SDL-devel, yasm
 %{?with_nonfree:BuildRequires: faac-devel}
-%{?with_dcadec:BuildRequires: dcadec-devel}
 %{?with_filecompress:BuildRequires: zlib-devel, bzip2-devel, xz-devel}
 %{?with_fontconfig:BuildRequires: fontconfig-devel}
 %{?with_freetype:BuildRequires: freetype-devel}
@@ -105,7 +104,6 @@ BuildRequires: SDL-devel, yasm
 %{?with_speex:BuildRequires: speex-devel}
 %{?with_twolame:BuildRequires: twolame-devel}
 %{?with_visualon:BuildRequires: vo-amrwbenc-devel}
-%{?with_visualon:%{!?with_nonfree:BuildRequires: vo-aacenc-devel}}
 %{?with_wavpack:BuildRequires: wavpack-devel}
 %{?with_x264:BuildRequires: x264-devel = %{x264version}}
 %{?with_x265:BuildRequires: x265-devel = %{x265version}}
@@ -151,7 +149,6 @@ Requires: %{name}-libswresample = %{version}-%{release}
 Requires: %{name}-libpostproc = %{version}-%{release}
 Requires: libX11-devel, libXext-devel
 %{?with_nonfree:Requires: faac-devel}
-%{?with_dcadec:Requires: dcadec-devel}
 %{?with_filecompress:Requires: zlib-devel, bzip2-devel, xz-devel}
 %{?with_fontconfig:Requires: fontconfig-devel}
 %{?with_freetype:Requires: freetype-devel}
@@ -190,7 +187,6 @@ Requires: libX11-devel, libXext-devel
 %{?with_speex:Requires: speex-devel}
 %{?with_twolame:Requires: twolame-devel}
 %{?with_visualon:Requires: vo-amrwbenc-devel}
-%{?with_visualon:%{!?with_nonfree:Requires: vo-aacenc-devel}}
 %{?with_wavpack:Requires: wavpack-devel}
 %{?with_x264:Requires: x264-devel = %{x264version}}
 %{?with_x265:Requires: x265-devel = %{x265version}}
@@ -279,7 +275,6 @@ test -f version.h || echo "#define FFMPEG_VERSION \"%{evr}\"" > version.h
 	--enable-x11grab \
         %{?with_avisynth:--enable-avisynth} \
 	%{?with_nonfree:--enable-libfaac} \
-	%{?with_dcadec:--enable-libdcadec} \
 	%{?with_filecompress:--enable-zlib --enable-bzlib --enable-lzma} \
 	%{?with_fontconfig:--enable-fontconfig} \
 	%{?with_freetype:--enable-libfreetype} \
@@ -317,7 +312,6 @@ test -f version.h || echo "#define FFMPEG_VERSION \"%{evr}\"" > version.h
 	%{?with_speex:--enable-libspeex} \
 	%{?with_twolame:--enable-twolame} \
 	%{?with_visualon:--enable-libvo-amrwbenc} \
-        %{?with_visualon:%{!?with_nonfree:--enable-libvo-aacenc}} \
 	%{?with_wavpack:--enable-libwavpack} \
 	%{?with_x264:--enable-libx264} \
 	%{?with_x265:--enable-libx265} \
@@ -401,6 +395,10 @@ rm -rf %{buildroot}
 %{_libdir}/libpostproc.so.*
 
 %changelog
+* Mon Feb 15 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.0-1
+- New upstream release
+- Removed libvo-aacenc
+
 * Sat Feb 6 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 2.8.6-1
 - New upstream release
 - Removed dcadec to prepare for the ffmpeg native implementation of dcadec
