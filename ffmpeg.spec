@@ -51,12 +51,12 @@
 %bcond_without soxr
 %bcond_without wavpack
 
-%global x264version 0.146
-%global x265version 1.8
+%global x264version 0.148
+%global x265version 1.9
 
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
-Version: 3.0
+Version: 3.0.1
 Release: 1%{?dist}
 License: GPLv3
 Group: System Environment/Libraries
@@ -396,6 +396,10 @@ rm -rf %{buildroot}
 %{_libdir}/libpostproc.so.*
 
 %changelog
+* Sun Apr 3 2016 Fredrik Fornstad <fredrik.fornstad@gmailc.com> - 3.0.1-1
+- New upstream release
+- New versions of x264 and x265
+
 * Mon Feb 15 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.0-1
 - New upstream release
 - Removed libvo-aacenc
