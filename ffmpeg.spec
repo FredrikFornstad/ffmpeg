@@ -56,7 +56,7 @@
 
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
-Version: 3.0.1
+Version: 3.0.2
 Release: 1%{?dist}
 License: GPLv3
 Group: System Environment/Libraries
@@ -396,7 +396,10 @@ rm -rf %{buildroot}
 %{_libdir}/libpostproc.so.*
 
 %changelog
-* Sun Apr 3 2016 Fredrik Fornstad <fredrik.fornstad@gmailc.com> - 3.0.1-1
+* Sun May 8 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.0.2-1
+- New upstream release
+
+* Sun Apr 3 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.0.1-1
 - New upstream release
 - New versions of x264 and x265
 
