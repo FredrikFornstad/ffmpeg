@@ -57,7 +57,7 @@
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
 Version: 3.1.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 License: GPLv3
 Group: System Environment/Libraries
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.xz
@@ -232,6 +232,7 @@ This package contain the FFmpeg-libavdevice shared library
 %package libavfilter
 Summary: FFmpeg-libavfilter shared library
 Group: Development/Libraries
+%{?with_frei0r:Requires: frei0r-plugins}
 
 %description libavfilter
 This package contain the FFmpeg-libavfilter shared library
@@ -396,6 +397,9 @@ rm -rf %{buildroot}
 %{_libdir}/libpostproc.so.*
 
 %changelog
+* Thu Sep 8 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.1.3-2
+- Added requirement for frei0r-plugins to avfilter if enabled
+
 * Fri Aug 26 2016 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.1.3-1
 - New upstream release
 
