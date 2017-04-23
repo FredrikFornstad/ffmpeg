@@ -52,12 +52,12 @@
 %bcond_without wavpack
 
 %global x264version 0.148
-%global x265version 2.3
+%global x265version 2.4
 
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
 Version: 3.1.7
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPLv3
 Group: System Environment/Libraries
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.xz
@@ -274,7 +274,7 @@ test -f version.h || echo "#define FFMPEG_VERSION \"%{evr}\"" > version.h
 	--enable-postproc \
 	--enable-avfilter \
 	--enable-pthreads \
-	--enable-x11grab \
+	--enable-libxcb \
         %{?with_avisynth:--enable-avisynth} \
 	%{?with_nonfree:--enable-libfaac} \
 	%{?with_filecompress:--enable-zlib --enable-bzlib --enable-lzma} \
@@ -397,6 +397,10 @@ rm -rf %{buildroot}
 %{_libdir}/libpostproc.so.*
 
 %changelog
+* Sun Apr 23 2017 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.1.7-3
+- New version of x265
+- Use libxcb for X11 grabbing
+
 * Wed Feb 15 2017 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.1.7-2
 - New version of x265
 
