@@ -57,7 +57,7 @@
 Summary: Hyper fast MPEG1/MPEG4/H263/RV and AC3/MPEG audio encoder
 Name: ffmpeg
 Version: 3.1.11
-Release: 2%{?dist}
+Release: 3%{?dist}
 License: GPLv3
 Group: System Environment/Libraries
 Source: http://ffmpeg.org/releases/%{name}-%{version}.tar.xz
@@ -109,7 +109,7 @@ BuildRequires: SDL-devel, yasm
 %{?with_x265:BuildRequires: x265-devel = %{x265version}}
 %{?with_xavs:BuildRequires: xavs-devel}
 %{?with_xvid:BuildRequires: xvidcore-devel}
-%{?with_vidstab:BuildRequires: vid.stab, vid.stab-devel}
+%{?with_vidstab:BuildRequires: vid.stab-devel >= 1.1}
 Requires: %{name}-libavutil
 Requires: %{name}-libavcodec
 Requires: %{name}-libavformat
@@ -126,7 +126,9 @@ Obsoletes: %{name}-libavfilter_5
 Obsoletes: %{name}-libswscale_3
 Obsoletes: %{name}-libswresample_1
 Obsoletes: %{name}-libpostproc_53
-
+Obsoletes: vid.stab-libs_1.1
+Obsoletes: vid.stab < 1.1
+Obsoletes: vid.stab-devel < 1.1
 
 %description
 FFmpeg is a very fast video and audio converter. It can also grab from a
@@ -193,7 +195,7 @@ Requires: libX11-devel, libXext-devel
 %{?with_x265:Requires: x265-devel = %{x265version}}
 %{?with_xavs:Requires: xavs-devel}
 %{?with_xvid:Requires: xvidcore-devel}
-%{?with_vidstab:Requires: vid.stab, vid.stab-devel}
+%{?with_vidstab:Requires: vid.stab-devel >= 1.1}
 
 %description devel
 This package contains the FFmpeg shared library development files
@@ -397,6 +399,9 @@ rm -rf %{buildroot}
 %{_libdir}/libpostproc.so.*
 
 %changelog
+* Thu Aug 16 2018 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.1.11-3
+- New build with new vid.stab from clearos.epel
+
 * Sat Dec 2 2017 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.1.11-2
 - New build for x265 2.6
 
