@@ -76,7 +76,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg%{?flavor}
 Version:        3.4.6
-Release:        3%{?date}%{?date:git}%{?rel}%{?dist}
+Release:        4%{?date}%{?date:git}%{?rel}%{?dist}
 License:        %{ffmpeg_license}
 URL:            http://ffmpeg.org/
 %if 0%{?date}
@@ -438,6 +438,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 
 
 %changelog
+* Wed Oct 2 2019 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.4.6-4
+- Rebuild for x265-3.2
+
 * Tue Jun 18 2019 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.4.6-3
 - Added forgotten patch file to source files in the Koji build system
 
