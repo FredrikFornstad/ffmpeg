@@ -76,7 +76,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg%{?flavor}
 Version:        3.4.6
-Release:        4%{?date}%{?date:git}%{?rel}%{?dist}
+Release:        5%{?date}%{?date:git}%{?rel}%{?dist}
 License:        %{ffmpeg_license}
 URL:            http://ffmpeg.org/
 %if 0%{?date}
@@ -84,6 +84,9 @@ Source0:        ffmpeg-%{?branch}%{date}.tar.bz2
 %else
 Source0:        http://ffmpeg.org/releases/ffmpeg-%{version}.tar.xz
 %endif
+
+Source1:    http://www.nasm.us/pub/nasm/releasebuilds/2.14.02/nasm-2.14.02.tar.bz2
+
 #Backport patch for arm neon
 Patch0:         0001-arm-Fix-SIGBUS-on-ARM-when-compiled-with-binutils-2..patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
@@ -337,7 +340,22 @@ sed -i "s|check_host_cflags -O3|check_host_cflags %{optflags}|" configure
 mkdir -p _doc/examples
 cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 
+tar -vxjf %{SOURCE1}
+
 %build
+
+%ifarch x86_64
+# First lets build our own version of nasm for x86_64
+echo =========== Building our own version of nasm ==============
+cd nasm-2.14.02
+./autogen.sh
+./configure --prefix=%{_builddir}"/%{name}-%{version}/source/nasm" --bindir=%{_builddir}"/%{name}-%{version}/source/nasm/bin" CFLAGS=" -std=c11"
+make
+make install
+cd ..
+echo =========== nasm build is ready ==============
+%endif
+
 %{ff_configure}\
     --shlibdir=%{_libdir} \
 %if 0%{?_without_tools:1}
@@ -438,6 +456,10 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 
 
 %changelog
+* Sun Mar 15 2020 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.4.6-5
+- Rebuild for x265-3.3
+- Added newer version of nasm for x86_64
+
 * Wed Oct 2 2019 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.4.6-4
 - Rebuild for x265-3.2
 
