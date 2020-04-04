@@ -75,8 +75,8 @@
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg%{?flavor}
-Version:        3.4.6
-Release:        5%{?date}%{?date:git}%{?rel}%{?dist}
+Version:        3.4.7
+Release:        1%{?date}%{?date:git}%{?rel}%{?dist}
 License:        %{ffmpeg_license}
 URL:            http://ffmpeg.org/
 %if 0%{?date}
@@ -456,6 +456,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 
 
 %changelog
+* Sat Apr 4 2020 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.4.7-1
+- Release 3.4.7
+
 * Sun Mar 15 2020 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.4.6-5
 - Rebuild for x265-3.3
 - Added newer version of nasm for x86_64
