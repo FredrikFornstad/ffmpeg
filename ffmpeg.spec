@@ -75,17 +75,17 @@
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg%{?flavor}
-Version:        3.4.7
+Version:        3.4.8
 Release:        1%{?date}%{?date:git}%{?rel}%{?dist}
 License:        %{ffmpeg_license}
 URL:            http://ffmpeg.org/
 %if 0%{?date}
 Source0:        ffmpeg-%{?branch}%{date}.tar.bz2
 %else
-Source0:        http://ffmpeg.org/releases/ffmpeg-%{version}.tar.xz
+Source0:        http://ffmpeg.org/releases/ffmpeg-%{version}.tar.bz2
 %endif
 
-Source1:    http://www.nasm.us/pub/nasm/releasebuilds/2.14.02/nasm-2.14.02.tar.bz2
+Source1:    http://www.nasm.us/pub/nasm/releasebuilds/2.14.02/nasm-2.15.05.tar.bz2
 
 #Backport patch for arm neon
 Patch0:         0001-arm-Fix-SIGBUS-on-ARM-when-compiled-with-binutils-2..patch
@@ -317,6 +317,7 @@ This package contains development files for %{name}
     %{!?_without_zvbi:--enable-libzvbi} \\\
     --enable-avfilter \\\
     --enable-avresample \\\
+    --enable-libmodplug \\\
     --enable-postproc \\\
     --enable-pthreads \\\
     --disable-static \\\
@@ -347,7 +348,7 @@ tar -vxjf %{SOURCE1}
 %ifarch x86_64
 # First lets build our own version of nasm for x86_64
 echo =========== Building our own version of nasm ==============
-cd nasm-2.14.02
+cd nasm-2.15.05
 ./autogen.sh
 ./configure --prefix=%{_builddir}"/%{name}-%{version}/source/nasm" --bindir=%{_builddir}"/%{name}-%{version}/source/nasm/bin" CFLAGS=" -std=c11"
 make
@@ -456,6 +457,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 
 
 %changelog
+* Sun Apr 25 2021 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.4.8-1
+- New upstream release
+
 * Sat Apr 4 2020 Fredrik Fornstad <fredrik.fornstad@gmail.com> - 3.4.7-1
 - Release 3.4.7
 
